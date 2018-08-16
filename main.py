@@ -11,8 +11,5 @@ def testFun():
     print(move9_obj.move_9_to_end(list))
 
 
-
-
-
 if __name__ == '__main__':
     testFun()
