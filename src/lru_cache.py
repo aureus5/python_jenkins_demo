@@ -50,8 +50,8 @@ class LRUCache(object):
             self.dict[key] = new_n
         else:
             if len(self.dict) >= self.capacity:
-                # if self.capacity <= 0:        # bug found: if capacity is zero, set operation should not pop elements
-                #     return
+                if self.capacity <= 0:        # bug found: if capacity is zero, set operation should not pop elements
+                    return
                 remove_n = self.tail.pre
                 self.dict.pop(remove_n.key, None)
                 self.remove_from_list(remove_n)
