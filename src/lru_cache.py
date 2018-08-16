@@ -1,10 +1,27 @@
 
+
+'''
+LRUCache cache = new LRUCache( 2 /* capacity */ );
+
+cache.set(1, 1);
+cache.set(2, 2);
+cache.get(1);       // returns 1
+cache.set(3, 3);    // evicts key 2
+cache.get(2);       // returns -1 (not found)
+cache.set(4, 4);    // evicts key 1
+cache.get(1);       // returns -1 (not found)
+cache.get(3);       // returns 3
+cache.get(4);       // returns 4
+'''
+
+
 class Node(object):
     def __init__(self, key, value):
         self.key = key
         self.val = value
         self.pre = None
         self.next = None
+
 
 class LRUCache(object):
     def __init__(self, capacity):
@@ -40,7 +57,6 @@ class LRUCache(object):
                 self.remove_from_list(remove_n)
             self.add_to_list(new_n)
             self.dict[key] = new_n
-
 
     def remove_from_list(self, moving_node):
         pre_n = moving_node.pre

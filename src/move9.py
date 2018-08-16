@@ -11,6 +11,7 @@ class Move9(object):
     [9, 3, 4, 9, 9, 3, 2, 1]
     After moving 9
     [3, 4, 3, 2, 1, 9, 9, 9]
+    restrictions: all numbers are within the range [-2,147,483,648, 2,147,483,647], inclusive. Otherwise return None
     '''
     def move_9_to_end(self, list):
         pointer = 0

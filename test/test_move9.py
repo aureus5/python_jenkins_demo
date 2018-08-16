@@ -32,12 +32,12 @@ def test_size_of_array(list, get_obj):
 def test_int_overflow(list, get_obj):
     for num in list:
         if num > pow(2, 31) - 1 or num < -pow(2, 31):
-            assert get_obj.move_9_to_end(list) is None
+            assert get_obj.move_9_to_end(list) is None  # list elements should be within [-2,147,483,648, 2,147,483,647]
 
 @pytest.mark.parametrize("list", Move9_test_cases)
 def test_consecutive_9_at_end_of_list(list, get_obj):
     transformed = get_obj.move_9_to_end(list)
-    if transformed is not None:    # only when list is valid shall we compare transformed list
+    if transformed is not None:         # only when list is valid shall we compare transformed list
         num_of_9_ori = 0
         num_of_9_tran = 0
         for num in list:
@@ -49,6 +49,24 @@ def test_consecutive_9_at_end_of_list(list, get_obj):
         assert num_of_9_ori == num_of_9_tran
 
 
+@pytest.mark.parametrize("list", Move9_test_cases)
+def test_none_9_items_order_kept(list, get_obj):
+    transformed = get_obj.move_9_to_end(list)
+    if transformed is not None:         # only when list is valid shall we compare transformed list
+        none_9_ori = []
+        for num in list:
+            if num != 9:
+                none_9_ori.append(num)
+        none_9_trans = []
+        for num in transformed:
+            if num != 9:
+                none_9_trans.append(num)
+        assert none_9_ori == none_9_trans
 
-if __name__ == "__main__":
-    pytest.main(["-s", __file__])
+
+@pytest.mark.parametrize("list", Move9_test_cases)
+def test_transform_twice(list, get_obj):
+    transformed = get_obj.move_9_to_end(list)
+    if transformed is not None:         # only when list is valid shall we compare transformed list
+        assert get_obj.move_9_to_end(transformed) is not None
+        assert transformed == get_obj.move_9_to_end(transformed)
